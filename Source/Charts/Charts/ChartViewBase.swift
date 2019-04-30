@@ -513,6 +513,10 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         var entry: ChartDataEntry?
         var h = highlight
         
+        if callDelegate && h == nil {
+            return // ignore unselection by tap
+        }
+        
         if h == nil
         {
             self.lastHighlighted = nil

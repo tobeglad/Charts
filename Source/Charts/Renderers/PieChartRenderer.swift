@@ -116,7 +116,7 @@ open class PieChartRenderer: DataRenderer
         let center = chart.centerCircleBox
         let radius = chart.radius
         let drawInnerArc = chart.drawHoleEnabled && !chart.drawSlicesUnderHoleEnabled
-        let userInnerRadius = drawInnerArc ? radius * chart.holeRadiusPercent : 0.0
+        let userInnerRadius = drawInnerArc ? (radius * chart.holeRadiusPercent + 1) : 0.0
 
         var visibleAngleCount = 0
         for j in 0 ..< entryCount
@@ -257,7 +257,7 @@ open class PieChartRenderer: DataRenderer
 
                     context.beginPath()
                     context.addPath(path)
-                    context.fillPath(using: .evenOdd)
+                    drawPathWithFillAndStroke(context: context)
 
                     let axElement = createAccessibleElement(withIndex: j,
                                                             container: chart,
@@ -277,6 +277,12 @@ open class PieChartRenderer: DataRenderer
         accessibilityPostLayoutChangedNotification()
 
         context.restoreGState()
+    }
+
+    private func drawPathWithFillAndStroke(context: CGContext) {
+        context.setLineWidth(1)
+        context.setStrokeColor(UIColor.black.withAlphaComponent(0.15).cgColor)
+        context.drawPath(using: .fillStroke)
     }
 
     open override func drawValues(context: CGContext)

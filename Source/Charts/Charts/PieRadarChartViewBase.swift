@@ -790,7 +790,10 @@ open class PieRadarChartViewBase: ChartViewBase
             let location = recognizer.location(in: self)
             
             let high = self.getHighlightByTouchPoint(location)
-            self.highlightValue(high, callDelegate: true)
+
+            UIView.transition(with: self, duration: 0.2, options: .transitionCrossDissolve, animations: {
+                self.highlightValue(high, callDelegate: true)
+            })
         }
     }
     
