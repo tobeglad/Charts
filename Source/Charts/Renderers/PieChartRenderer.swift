@@ -281,7 +281,9 @@ open class PieChartRenderer: DataRenderer
 
     private func drawPathWithFillAndStroke(context: CGContext) {
         context.setLineWidth(1)
-        context.setStrokeColor(UIColor.black.withAlphaComponent(0.15).cgColor)
+
+        let outlineColor = chart?.outlineColor ?? UIColor.magenta
+        context.setStrokeColor(outlineColor.cgColor)
         context.drawPath(using: .fillStroke)
     }
 
