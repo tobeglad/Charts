@@ -68,7 +68,7 @@ open class PieChartView: PieRadarChartViewBase
     /// maximum angle for this pie
     private var _maxAngle: CGFloat = 360.0
 
-    var outlineColor: UIColor = NSUIColor(white: 0.5, alpha: 1.0)
+    public var outlineColor: UIColor = NSUIColor(white: 0.5, alpha: 1.0)
 
     public override init(frame: CGRect)
     {
